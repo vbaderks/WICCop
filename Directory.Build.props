@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Build to a folder outside the source folders, making it easier to clean. -->
+    <OutDir>$(MSBuildThisFileDirectory)bin\$(Configuration)\$(Platform)\</OutDir>
+
+    <!-- C# Projects require the legagy OutputPath variable. -->
+    <OutputPath>$(OutDir)</OutputPath>
+
+    <IntDir>$(MSBuildThisFileDirectory)intermediate\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</IntDir>
+
+    <!-- Use the latest released C# language version -->
+    <LangVersion>latest</LangVersion>
+
+    <!-- Define treat warnings as errors for C# projects -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+  </PropertyGroup>
+</Project>
