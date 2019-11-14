@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -18,26 +18,26 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
 {
-    class DevelopRawRule : DecoderRuleBase
+    internal class DevelopRawRule : DecoderRuleBase
     {
-        delegate void GetTriplet<T>(out T t1, out T t2, out T t3);
+        private delegate void GetTriplet<T>(out T t1, out T t2, out T t3);
 
-        class Notification : IWICDevelopRawNotificationCallback
+        private class Notification : IWICDevelopRawNotificationCallback
         {
-            bool notified;
-            WICRawChangeNotification expected;
-            readonly List<WICRawChangeNotification> raised = new List<WICRawChangeNotification>();
+            private WICRawChangeNotification expected;
+            private readonly List<WICRawChangeNotification> raised = new List<WICRawChangeNotification>();
 
             internal void Expect(WICRawChangeNotification expected)
             {
-                notified = false;
+                Notified = false;
                 this.expected = expected;
                 raised.Clear();
             }
 
             internal bool Notified
             {
-                get { return notified; }
+                get;
+                private set;
             }
 
             internal WICRawChangeNotification[] GetRaised()
@@ -49,21 +49,21 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             {
                 if ((uint)(NotificationMask & expected) != 0 || (uint)NotificationMask == 0)
                 {
-                    notified = true;
+                    Notified = true;
                 }
                 raised.Add(NotificationMask);
             }
         }
 
-        static readonly double[] rotation90 = new double[] { -180, -90, 0, 90, 180, 360 };
-        static readonly double[] rotation = GetRotations(50);
+        private static readonly double[] rotation90 = new double[] { -180, -90, 0, 90, 180, 360 };
+        private static readonly double[] rotation = GetRotations(50);
 
         public DevelopRawRule()
             : base(Resources.DevelopRawRule_Text)
         {
         }
 
-        static double[] GetRotations(int length)
+        private static double[] GetRotations(int length)
         {
             Random r = new Random();
             double[] res = new double[rotation90.Length + length];
@@ -88,7 +88,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        void CheckSetDestinationColorContextSupported(MainForm form, WinCodecError? error, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
+        private void CheckSetDestinationColorContextSupported(MainForm form, WinCodecError? error, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
         {
             Notification[] notifications = new Notification[] { new Notification(), new Notification(), null };
             IWICImagingFactory factory = new WICImagingFactory() as IWICImagingFactory;
@@ -149,7 +149,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        void CheckSetToneCurveSupported(MainForm form, WinCodecError? error, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
+        private void CheckSetToneCurveSupported(MainForm form, WinCodecError? error, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
         {
             Notification[] notifications = new Notification[] { new Notification(), new Notification(), null };
             Func<uint, IntPtr, uint> getter = raw.GetToneCurve;
@@ -237,7 +237,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        void CheckSetRgbWhitePointSupported(MainForm form, WinCodecError? error, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
+        private void CheckSetRgbWhitePointSupported(MainForm form, WinCodecError? error, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
         {
             Notification[] notifications = new Notification[] { new Notification(), new Notification(), null };
             GetTriplet<uint> getter = raw.GetWhitePointRGB;
@@ -308,7 +308,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        void CheckSetNamedWhitePointSupported(MainForm form, WinCodecError? error, WICNamedWhitePoint wp, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
+        private void CheckSetNamedWhitePointSupported(MainForm form, WinCodecError? error, WICNamedWhitePoint wp, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
         {
             List<WICNamedWhitePoint> points = new List<WICNamedWhitePoint>();
             List<WICNamedWhitePoint> outOfRange = new List<WICNamedWhitePoint>();
@@ -328,7 +328,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             CheckSetSupported(form, WinCodecError.WINCODEC_ERR_VALUEOUTOFRANGE, raw.GetNamedWhitePoint, raw.SetNamedWhitePoint, raw, WICRawChangeNotification.WICRawChangeNotification_NamedWhitePoint, de, pixelFormatOriginal, outOfRange.ToArray());
         }
 
-        void CheckSetSupported<T>(MainForm form, WinCodecError? error, Func<T> getter, Action<T> setter, IWICDevelopRaw raw, WICRawChangeNotification mask, DataEntry[] de, Guid pixelFormatOriginal, params T[] values) where T : struct
+        private void CheckSetSupported<T>(MainForm form, WinCodecError? error, Func<T> getter, Action<T> setter, IWICDevelopRaw raw, WICRawChangeNotification mask, DataEntry[] de, Guid pixelFormatOriginal, params T[] values) where T : struct
         {
             Notification[] notifications = new Notification[] { new Notification(), new Notification(), null };
 
@@ -402,7 +402,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        T? CheckGetSupported<T>(MainForm form, bool supported, Func<T> getter, DataEntry[] de, T? expected) where T : struct
+        private T? CheckGetSupported<T>(MainForm form, bool supported, Func<T> getter, DataEntry[] de, T? expected) where T : struct
         {
             T? value = null;
             try
@@ -435,7 +435,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             return value;
         }
 
-        uint[] CheckGetSupported(MainForm form, bool supported, GetTriplet<uint> getter, DataEntry[] de, uint[] rgb)
+        private uint[] CheckGetSupported(MainForm form, bool supported, GetTriplet<uint> getter, DataEntry[] de, uint[] rgb)
         {
             uint[] value = null;
             try
@@ -470,7 +470,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             return value;
         }
 
-        WICRawToneCurvePoint[] CheckGetSupported(MainForm form, bool supported, Func<uint, IntPtr, uint> getter, DataEntry[] de)
+        private WICRawToneCurvePoint[] CheckGetSupported(MainForm form, bool supported, Func<uint, IntPtr, uint> getter, DataEntry[] de)
         {
             WICRawToneCurvePoint[] value = null;
             uint size = 0;
@@ -533,7 +533,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             return value;
         }
 
-        IWICColorContext[] CheckGetSupported(MainForm form, bool supported, Func<uint, IWICColorContext[], uint> getter, DataEntry[] de)
+        private IWICColorContext[] CheckGetSupported(MainForm form, bool supported, Func<uint, IWICColorContext[], uint> getter, DataEntry[] de)
         {
             IWICColorContext[] value = null;
             uint size = 0;
@@ -608,14 +608,14 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
                 || capabilities == WICRawCapabilities.WICRawCapabilityFullySupported;
         }
 
-        static bool GetSupported(WICRawRotationCapabilities capabilities)
+        private static bool GetSupported(WICRawRotationCapabilities capabilities)
         {
             return capabilities == WICRawRotationCapabilities.WICRawRotationCapabilityGetSupported
                 || capabilities == WICRawRotationCapabilities.WICRawRotationCapabilityFullySupported
                 || capabilities == WICRawRotationCapabilities.WICRawRotationCapabilityNinetyDegreesSupported;
         }
 
-        void CheckPixelFormat(MainForm form, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
+        private void CheckPixelFormat(MainForm form, IWICDevelopRaw raw, DataEntry[] de, Guid pixelFormatOriginal)
         {
             Guid pixelFormat;
             raw.GetPixelFormat(out pixelFormat);

@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -14,12 +14,12 @@ using Microsoft.Test.Tools.WicCop.Rules;
 
 namespace Microsoft.Test.Tools.WicCop
 {
-    class DataEntryCollectionConverter : CollectionConverter
+    internal class DataEntryCollectionConverter : CollectionConverter
     {
-        class DataEntryPropertyDescriptor : SimplePropertyDescriptor
+        private class DataEntryPropertyDescriptor : SimplePropertyDescriptor
         {
-            readonly DataEntry entry;
-            readonly RuleBase rule;
+            private readonly DataEntry entry;
+            private readonly RuleBase rule;
 
             public DataEntryPropertyDescriptor(DataEntry entry, RuleBase rule)
                 : base(typeof(DataEntryCollection), entry.Text, entry.Value == null ? typeof(object): entry.Value.GetType(), null)
@@ -51,7 +51,7 @@ namespace Microsoft.Test.Tools.WicCop
 
         public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
         {
-            DataEntryCollection d = value as DataEntryCollection;
+            var d = value as DataEntryCollection;
 
             return new PropertyDescriptorCollection(Array.ConvertAll<DataEntry, DataEntryPropertyDescriptor>(d.ToArray(), delegate(DataEntry input) { return new DataEntryPropertyDescriptor(input, d.Parent); }), true);
         }

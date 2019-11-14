@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -15,9 +15,9 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
 {
-    class ShellIntegrationRule : ShellIntegrationRuleBase
+    internal class ShellIntegrationRule : ShellIntegrationRuleBase
     {
-        const string ContentType = "Content Type";
+        private const string ContentType = "Content Type";
 
         public ShellIntegrationRule()
             : base (Resources.ShellIntegrationRuleGroup_Text)

@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -20,9 +20,9 @@ using Microsoft.Test.Tools.WicCop.Rules.Wow;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
 {
-    class BitmapDecoderInfoRule : DecoderRuleBase, IWowRegistryChecked
+    internal class BitmapDecoderInfoRule : DecoderRuleBase, IWowRegistryChecked
     {
-        new class Tag
+        private new class Tag
         {
             public Guid[] PixelFormats;
             public string[] Extensions;
@@ -34,7 +34,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
         {
         }
 
-        void Check(MainForm form, IWICBitmapDecoderInfo info, Tag tag)
+        private void Check(MainForm form, IWICBitmapDecoderInfo info, Tag tag)
         {
             ComponentInfoHelper.CheckNotReserverdGuid(form, info.GetContainerFormat, this);
 
@@ -51,8 +51,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
             tag.SupportsMultiframe = info.DoesSupportMultiframe();
 
-            uint count;
-            uint size = info.GetPatterns(0, IntPtr.Zero, out count);
+            uint size = info.GetPatterns(0, IntPtr.Zero, out var count);
             if (size != 0)
             {
                 IntPtr p = Marshal.AllocCoTaskMem((int)size);
@@ -62,7 +61,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
 
                     WICBitmapPattern[] patterns = PropVariantMarshaler.ToArrayOf<WICBitmapPattern>(p, (int)count);
                     int index = 0;
-                    HashSet<int> dups = new HashSet<int>();
+                    var dups = new HashSet<int>();
                     foreach (WICBitmapPattern pattern in patterns)
                     {
                         index++;
@@ -95,7 +94,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        static byte[] GetNormalizedMask(WICBitmapPattern pattern)
+        private static byte[] GetNormalizedMask(WICBitmapPattern pattern)
         {
             byte[] t = PropVariantMarshaler.ToArrayOf<byte>(pattern.Pattern, (int)pattern.Length);
             byte[] mask = PropVariantMarshaler.ToArrayOf<byte>(pattern.Mask, (int)pattern.Length);
@@ -121,8 +120,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             IWICBitmapDecoderInfo info = decoder.GetDecoderInfo();
             try
             {
-                Guid clsid;
-                info.GetCLSID(out clsid);
+                info.GetCLSID(out var clsid);
                 if (clsid != Parent.Clsid)
                 {
                     form.Add(this, Resources.IncorrectDecoderPickedUp, de, new DataEntry(Resources.Expected, Parent.Clsid), new DataEntry(Resources.Actual, clsid));
@@ -146,10 +144,9 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
 
         protected override bool ProcessFrameDecode(MainForm form, IWICBitmapFrameDecode frame, DataEntry[] de, object tag)
         {
-            Guid pixelFormat;
-            frame.GetPixelFormat(out pixelFormat);
+            frame.GetPixelFormat(out var pixelFormat);
 
-            Tag t = (Tag)tag;
+            var t = (Tag)tag;
             if (Array.IndexOf(t.PixelFormats, pixelFormat) < 0)
             {
                 form.Add(this, Resources.DecoderUnsuportedPixelFormat, de, new DataEntry(Resources.PixelFormat, pixelFormat), new DataEntry(Resources.SupportedPixelFormats, t.PixelFormats));

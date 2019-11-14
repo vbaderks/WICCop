@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -18,7 +18,7 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
 {
-    abstract class ShellIntegrationRuleBase : RuleBase<ExtensionRuleGroup>
+    internal abstract class ShellIntegrationRuleBase : RuleBase<ExtensionRuleGroup>
     {
         protected const string PerceivedType = "PerceivedType";
 
@@ -92,7 +92,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
             }
         }
 
-        static string RegistryNormilize(string s)
+        private static string RegistryNormilize(string s)
         {
             StringBuilder sb = new StringBuilder();
             string c = s.Replace(",", " , ");
@@ -112,7 +112,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
                     while (start < c.Length)
                     {
                         int idx = c.IndexOf('\"', start);
-                    
+
                         if (idx < 0)
                         {
                             add = c.Substring(1).Replace("\"\"", "\"");
@@ -178,13 +178,11 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
         protected override void RunOverride(MainForm form, object tag)
         {
             string ext = Parent.Extension;
-            DataEntry[] de = new DataEntry[] { new DataEntry(Resources.FileExtennsion, ext) };
-            using (RegistryKey rk = OpenSubKey(form, Registry.ClassesRoot, ext, de))
+            DataEntry[] de = { new DataEntry(Resources.FileExtennsion, ext) };
+            using RegistryKey rk = OpenSubKey(form, Registry.ClassesRoot, ext, de);
+            if (rk != null)
             {
-                if (rk != null)
-                {
-                    Check(form, ext, rk, de);
-                }
+                Check(form, ext, rk, de);
             }
         }
     }

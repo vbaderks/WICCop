@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -18,13 +18,13 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules
 {
-    static class ComponentInfoHelper
+    internal static class ComponentInfoHelper
     {
         public delegate void GeGuidMethod(out Guid guid);
 
         public static readonly Regex ExtensionMask = new Regex(@"^\.(\w+)$");
         public static readonly Regex MimeMask = new Regex(@"^\w+((-|\.)(\w+))*/\w+((-|\.)(\w+))*$");
-        static readonly Regex VersionMask = new Regex(@"^[0-9]+[\.[0-9]+]{1,3}$");
+        private static readonly Regex VersionMask = new Regex(@"^[0-9]+[\.[0-9]+]{1,3}$");
 
         public static string[] CheckCommaSeparatedString(MainForm form, Extensions.GetStringMethod method, Regex mask, RuleBase rule)
         {

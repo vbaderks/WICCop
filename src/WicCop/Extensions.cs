@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -19,18 +19,20 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop
 {
-    static class Extensions
+    internal static class Extensions
     {
         public delegate uint GetStringMethod(uint cch, StringBuilder wz);
-        delegate void GetGuidMethod(out Guid guid);
+
+        private delegate void GetGuidMethod(out Guid guid);
 
         public static string GetString(GetStringMethod method)
         {
             uint size = method(0, null);
             if (size > 0)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Length = (int)size;
+                var sb = new StringBuilder {
+                    Length = (int)size
+                };
                 method(size, sb);
 
                 return sb.ToString();
@@ -63,20 +65,21 @@ namespace Microsoft.Test.Tools.WicCop
             return string.Format(CultureInfo.CurrentUICulture, format, s);
         }
 
-public static void ReleaseComObject(this object o)
-{
-    if (o == null) return;
-    if (o.GetType().IsArray) { foreach (object i in o as Array) i.ReleaseComObject(); }
-    else Marshal.ReleaseComObject(o);
-}
+        public static void ReleaseComObject(this object o)
+        {
+            if (o == null) return;
+            if (o.GetType().IsArray) { foreach (object i in o as Array) i.ReleaseComObject(); }
+            else Marshal.ReleaseComObject(o);
+        }
 
-        public static bool OrderedItemsEqual<T>(this T[] left, T[] right)
+        private static bool OrderedItemsEqual<T>(this T[] left, T[] right)
         {
             if (left == null)
             {
                 return right == null;
             }
-            else if (right == null)
+
+            if (right == null)
             {
                 return false;
             }
@@ -118,20 +121,18 @@ public static void ReleaseComObject(this object o)
             }
         }
 
-        static Guid GetGuid(GetGuidMethod method)
+        private static Guid GetGuid(GetGuidMethod method)
         {
-            Guid res;
-            method(out res);
-
+            method(out var res);
             return res;
         }
 
-        static void Add(this List<DataEntry[]> list, Delegate method, object expected, object actual)
+        private static void Add(this List<DataEntry[]> list, Delegate method, object expected, object actual)
         {
-            list.Add(new DataEntry[] { new DataEntry(Resources.Method, method.ToString("{0}")), new DataEntry(Resources.Expected, expected), new DataEntry(Resources.Actual, actual) });
+            list.Add(new[] { new DataEntry(Resources.Method, method.ToString("{0}")), new DataEntry(Resources.Expected, expected), new DataEntry(Resources.Actual, actual) });
         }
 
-        static void Check(GetGuidMethod left, GetGuidMethod right, List<DataEntry[]> violations)
+        private static void Check(GetGuidMethod left, GetGuidMethod right, List<DataEntry[]> violations)
         {
             Guid l = GetGuid(left);
             Guid r = GetGuid(right);
@@ -141,10 +142,10 @@ public static void ReleaseComObject(this object o)
             }
         }
 
-        static void CheckCommaSeparated(GetStringMethod left, GetStringMethod right, List<DataEntry[]> violations)
+        private static void CheckCommaSeparated(GetStringMethod left, GetStringMethod right, List<DataEntry[]> violations)
         {
-            string l = GetString(left);
-            string r = GetString(right);
+            var l = GetString(left);
+            var r = GetString(right);
 
             if (!l.Split(',').OrderedItemsEqual(r.Split(',')))
             {
@@ -152,17 +153,17 @@ public static void ReleaseComObject(this object o)
             }
         }
 
-        static void Check(GetStringMethod left, GetStringMethod right, List<DataEntry[]> violations)
+        private static void Check(GetStringMethod left, GetStringMethod right, List<DataEntry[]> violations)
         {
-            string l = GetString(left);
-            string r = GetString(right);
+            var l = GetString(left);
+            var r = GetString(right);
             if (l != r)
             {
                 violations.Add(left, l, r);
             }
         }
 
-        static void Check<T>(Func<T> left, Func<T> right, List<DataEntry[]> violations)
+        private static void Check<T>(Func<T> left, Func<T> right, List<DataEntry[]> violations)
         {
             T l = left();
             T r = right();
@@ -193,7 +194,7 @@ public static void ReleaseComObject(this object o)
             return res.ToArray();
         }
 
-        public static DataEntry[][] CompareInfos(this IWICComponentInfo left, IWICComponentInfo right)
+        private static DataEntry[][] CompareInfos(this IWICComponentInfo left, IWICComponentInfo right)
         {
             List<DataEntry[]> res = new List<DataEntry[]>();
 
@@ -207,7 +208,6 @@ public static void ReleaseComObject(this object o)
             Check(left.GetVersion, right.GetVersion, res);
 
             return res.ToArray();
-
         }
     }
 }

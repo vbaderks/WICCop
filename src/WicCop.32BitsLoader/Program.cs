@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -7,7 +7,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //----------------------------------------------------------------------------------------
 
-using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Remoting;
@@ -16,22 +15,20 @@ using System.Runtime.Remoting.Channels.Ipc;
 
 namespace Microsoft.Test.Tools.WicCop
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             ChannelServices.RegisterChannel(new IpcChannel(args[0]), false);
 
-            Remote rt = new Remote();
+            var rt = new Remote();
             ObjRef r = RemotingServices.Marshal(rt, Remote.ObjectName);
 
-            using (Process p = Process.GetProcessById(int.Parse(args[1], CultureInfo.InvariantCulture)))
-            {
-                p.EnableRaisingEvents = true;
-                p.Exited += delegate(object sender, EventArgs e) { rt.Exit(); };
+            using var p = Process.GetProcessById(int.Parse(args[1], CultureInfo.InvariantCulture));
+            p.EnableRaisingEvents = true;
+            p.Exited += delegate { rt.Exit(); };
 
-                rt.Wait();
-            }
+            rt.Wait();
         }
     }
 }

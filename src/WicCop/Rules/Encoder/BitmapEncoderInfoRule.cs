@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -19,9 +19,9 @@ using Microsoft.Test.Tools.WicCop.Rules.Wow;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
 {
-    class BitmapEncoderInfoRule : BitmapEncoderRuleBase, IWowRegistryChecked
+    internal class BitmapEncoderInfoRule : BitmapEncoderRuleBase, IWowRegistryChecked
     {
-        new class Tag
+        private new class Tag
         {
             public Guid[] PixelFormats;
             public string[] Extensions;
@@ -33,7 +33,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
         {
         }
 
-        void Check(MainForm form, IWICBitmapEncoderInfo info, Tag tag)
+        private void Check(MainForm form, IWICBitmapEncoderInfo info, Tag tag)
         {
             ComponentInfoHelper.CheckNotReserverdGuid(form, info.GetContainerFormat, this);
 

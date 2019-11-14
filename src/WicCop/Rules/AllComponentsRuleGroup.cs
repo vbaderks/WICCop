@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -16,7 +16,7 @@ using Microsoft.Test.Tools.WicCop.InteropServices.ComTypes;
 
 namespace Microsoft.Test.Tools.WicCop.Rules
 {
-    class AllComponentsRuleGroup : RuleBase
+    internal class AllComponentsRuleGroup : RuleBase
     {
         public AllComponentsRuleGroup(string text, WICComponentType type, Action<ComponentRuleGroup> childCreator, Remote remote)
             : base (text)

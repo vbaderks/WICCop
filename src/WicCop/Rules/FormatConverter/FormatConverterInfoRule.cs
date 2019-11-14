@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -19,9 +19,9 @@ using Microsoft.Test.Tools.WicCop.Rules.Wow;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.FormatConverter
 {
-    class FormatConverterInfoRule : RuleBase<ComponentRuleGroup>, IWowRegistryChecked
+    internal class FormatConverterInfoRule : RuleBase<ComponentRuleGroup>, IWowRegistryChecked
     {
-        static readonly Guid[] canonical = new Guid[]
+        private static readonly Guid[] canonical = new Guid[]
         {
             Consts.GUID_WICPixelFormat32bppBGRA,
             Consts.GUID_WICPixelFormat64bppRGBA,
@@ -35,7 +35,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.FormatConverter
         {
         }
 
-        bool CheckConvertion(MainForm form, IWICFormatConverterInfo info, Guid from, Guid to)
+        private bool CheckConvertion(MainForm form, IWICFormatConverterInfo info, Guid from, Guid to)
         {
             if (from == to)
             {
@@ -94,7 +94,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.FormatConverter
             }
         }
 
-        void Check(MainForm form, IWICFormatConverterInfo info, object tag)
+        private void Check(MainForm form, IWICFormatConverterInfo info, object tag)
         {
             Guid[] pixelFormats = PixelFormatInfoRule.CheckPixelFormats(form, this, info.GetPixelFormats);
             Type type = Type.GetTypeFromCLSID(Parent.Clsid);

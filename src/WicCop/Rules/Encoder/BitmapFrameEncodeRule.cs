@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -14,7 +14,7 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
 {
-    class BitmapFrameEncode : BitmapEncoderRuleBase
+    internal class BitmapFrameEncode : BitmapEncoderRuleBase
     {
         public BitmapFrameEncode()
             : base(Resources.BitmapFrameEncode_Text)

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Wow
 {
-    interface IWowRegistryChecked
+    internal interface IWowRegistryChecked
     {
         IEnumerable<string> GetKeys();
     }

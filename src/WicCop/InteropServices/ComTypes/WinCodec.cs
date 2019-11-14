@@ -142,7 +142,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     public struct PROPBAG2
     {
         public uint dwType;                 // Property type (from PROPBAG2_TYPE)
-        short _vt;                          // VARIANT property type
+        private short _vt;                          // VARIANT property type
         public CLIPFORMAT cfType;           // Clipboard format (aka MIME-type)
         public uint dwHint;                 // Property name hint
         [MarshalAs(UnmanagedType.LPWStr)]

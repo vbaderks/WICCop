@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -17,7 +17,7 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
 {
-    abstract class BitmapEncoderRuleBase : RuleBase<ComponentRuleGroup>
+    internal abstract class BitmapEncoderRuleBase : RuleBase<ComponentRuleGroup>
     {
         protected BitmapEncoderRuleBase(string text)
             : base(text)
@@ -68,10 +68,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
                 info.ReleaseComObject();
                 encoder.ReleaseComObject();
                 stream.ReleaseComObject();
-                if (files != null)
-                {
-                    files.Delete();
-                }
+                files?.Delete();
             }
         }
     }

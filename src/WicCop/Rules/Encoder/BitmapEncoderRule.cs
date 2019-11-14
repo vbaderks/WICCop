@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -15,14 +15,14 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
 {
-    class BitmapEncoderRule : BitmapEncoderRuleBase
+    internal class BitmapEncoderRule : BitmapEncoderRuleBase
     {
         public BitmapEncoderRule()
             : base(Resources.BitmapEncoderRule_Text)
         {
         }
 
-        void Check<T>(MainForm form, Action<T> action, T value)
+        private void Check<T>(MainForm form, Action<T> action, T value)
         {
             try
             {

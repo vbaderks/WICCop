@@ -19,8 +19,8 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         [StructLayout(LayoutKind.Sequential)]
         public struct CY
         {
-            uint Lo;
-            long Hi;
+            private uint Lo;
+            private long Hi;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -321,23 +321,23 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             {
                 if (marshalType == PropVariantMarshalType.Ascii)
                 {
-                    UnmanagedPropVariant upv = new UnmanagedPropVariant();
-                    upv.vt = (ushort)VarEnum.VT_LPSTR;
-                    upv.pointerValue = Marshal.StringToCoTaskMemAnsi((string)obj);
+                    var upv = new UnmanagedPropVariant {
+                        vt = (ushort)VarEnum.VT_LPSTR, pointerValue = Marshal.StringToCoTaskMemAnsi((string)obj)
+                    };
                     Marshal.StructureToPtr(upv, pNativeData, false);
                 }
                 else if (obj is DateTime)
                 {
-                    UnmanagedPropVariant upv = new UnmanagedPropVariant();
-                    upv.vt = (ushort)VarEnum.VT_FILETIME;
-                    upv.int64Value = ((DateTime)obj).ToFileTimeUtc();
+                    var upv = new UnmanagedPropVariant {
+                        vt = (ushort)VarEnum.VT_FILETIME, int64Value = ((DateTime)obj).ToFileTimeUtc()
+                    };
                     Marshal.StructureToPtr(upv, pNativeData, false);
                 }
                 else if (obj is string)
                 {
-                    UnmanagedPropVariant upv = new UnmanagedPropVariant();
-                    upv.vt = (ushort)VarEnum.VT_LPWSTR;
-                    upv.pointerValue = Marshal.StringToCoTaskMemUni((string)obj);
+                    var upv = new UnmanagedPropVariant {
+                        vt = (ushort)VarEnum.VT_LPWSTR, pointerValue = Marshal.StringToCoTaskMemUni((string)obj)
+                    };
                     Marshal.StructureToPtr(upv, pNativeData, false);
                 }
                 else
@@ -523,7 +523,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             }
         }
 
-        static string[] GetArrayOfStrings(IntPtr ptr, int count, Converter<IntPtr, string> converter)
+        private static string[] GetArrayOfStrings(IntPtr ptr, int count, Converter<IntPtr, string> converter)
         {
             return Array.ConvertAll<IntPtr, string>(ToArrayOf<IntPtr>(ptr, count), converter);
         }

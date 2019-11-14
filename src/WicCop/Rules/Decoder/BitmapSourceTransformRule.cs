@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -17,7 +17,7 @@ using Microsoft.Test.Tools.WicCop.Rules.PixelFormat;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
 {
-    class BitmapSourceTransformRule : DecoderRuleBase
+    internal class BitmapSourceTransformRule : DecoderRuleBase
     {
         public BitmapSourceTransformRule()
             : base(Resources.BitmapSourceTransformRule_Text)

@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -18,10 +18,10 @@ using Microsoft.Test.Tools.WicCop.Rules.Wow;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
 {
-    class PropertyStoreIntegrationRule : ShellIntegrationRuleBase, IWowRegistryChecked
+    internal class PropertyStoreIntegrationRule : ShellIntegrationRuleBase, IWowRegistryChecked
     {
-        const string PhotoMetadataHandler = "{a38b883c-1682-497e-97b0-0a3a9e801682}";
-        static readonly string[] PhotoMetadataHandlerContainerFormats = new string[] { Consts.GUID_ContainerFormatTiff.ToString("B"), Consts.GUID_ContainerFormatJpeg.ToString("B") };
+        private const string PhotoMetadataHandler = "{a38b883c-1682-497e-97b0-0a3a9e801682}";
+        private static readonly string[] PhotoMetadataHandlerContainerFormats = new string[] { Consts.GUID_ContainerFormatTiff.ToString("B"), Consts.GUID_ContainerFormatJpeg.ToString("B") };
 
         public PropertyStoreIntegrationRule()
             : base(Resources.PropertyStoreIntegrationRule_Text)

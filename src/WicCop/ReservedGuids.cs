@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -26,7 +26,7 @@ namespace Microsoft.Test.Tools.WicCop
             public string description;
         }
 
-        readonly List<ReservedGuid> items = new List<ReservedGuid>();
+        private readonly List<ReservedGuid> items = new List<ReservedGuid>();
 
         readonly public static ReservedGuids Instance = Read();
 
@@ -53,7 +53,7 @@ namespace Microsoft.Test.Tools.WicCop
             return false;
         }
 
-        static ReservedGuids Read()
+        private static ReservedGuids Read()
         {
             Type thisType = typeof(ReservedGuids);
 

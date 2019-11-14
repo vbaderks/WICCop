@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -27,7 +27,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules
         {
         }
 
-        void RunInternal(MainForm form)
+        private void RunInternal(MainForm form)
         {
             form.SetStatus(string.Format(CultureInfo.CurrentUICulture, Resources.Running, FullPath));
             try
@@ -50,9 +50,9 @@ namespace Microsoft.Test.Tools.WicCop.Rules
         }
     }
 
-    abstract class RuleBase<T> : RuleBase where T : RuleBase
+    internal abstract class RuleBase<T> : RuleBase where T : RuleBase
     {
-        static readonly bool wow = IntPtr.Size == 8;
+        private static readonly bool wow = IntPtr.Size == 8;
 
         protected RuleBase(string text)
             : base(text)

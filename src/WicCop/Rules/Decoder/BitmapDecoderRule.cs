@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -16,7 +16,7 @@ using Microsoft.Test.Tools.WicCop.Rules.PixelFormat;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
 {
-    class BitmapDecoderRule : DecoderRuleBase
+    internal class BitmapDecoderRule : DecoderRuleBase
     {
         public BitmapDecoderRule()
             : base(Resources.BitmapDecoderRule_Text)
@@ -64,7 +64,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             base.RunOverride(form, tag);
         }
 
-        void CheckGetBitmapSource(MainForm form, DataEntry[] de, Func<IWICBitmapSource> method, WinCodecError error)
+        private void CheckGetBitmapSource(MainForm form, DataEntry[] de, Func<IWICBitmapSource> method, WinCodecError error)
         {
             IWICBitmapSource bs = null;
             try
@@ -81,7 +81,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        void CheckGetColorContexts(MainForm form, DataEntry[] de, Func<uint, IWICColorContext[], uint> method)
+        private void CheckGetColorContexts(MainForm form, DataEntry[] de, Func<uint, IWICColorContext[], uint> method)
         {
             IWICColorContext[] contexts = null;
             IWICImagingFactory factory = new WICImagingFactory() as IWICImagingFactory;
@@ -130,7 +130,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             }
         }
 
-        void CheckCopyPalette(MainForm form, DataEntry[] de, Action<IWICPalette> method)
+        private void CheckCopyPalette(MainForm form, DataEntry[] de, Action<IWICPalette> method)
         {
             IWICImagingFactory factory = (IWICImagingFactory)new WICImagingFactory();
             IWICPalette palette = factory.CreatePalette();

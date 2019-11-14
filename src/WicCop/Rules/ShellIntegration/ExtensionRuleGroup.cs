@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -17,13 +17,13 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
 {
-    class ExtensionRuleGroup : RuleBase
+    internal class ExtensionRuleGroup : RuleBase
     {
-        readonly string extension;
-        readonly HashSet<string> mimes;
-        readonly HashSet<Guid> containerFormats;
-        readonly string progid;
-        readonly string fileExtName;
+        private readonly string extension;
+        private readonly HashSet<string> mimes;
+        private readonly HashSet<Guid> containerFormats;
+        private readonly string progid;
+        private readonly string fileExtName;
 
         public ExtensionRuleGroup(string extension, HashSet<string> mimes, HashSet<Guid> containerFormats)
             : base(extension)

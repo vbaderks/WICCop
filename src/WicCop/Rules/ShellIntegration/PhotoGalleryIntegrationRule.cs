@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -19,18 +19,18 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
 {
-    class PhotoGalleryIntegrationRule : ShellIntegrationRuleBase
+    internal class PhotoGalleryIntegrationRule : ShellIntegrationRuleBase
     {
-        const string PhotoGalleryGuid = "{FFE2A43C-56B9-4BF5-9A79-CC6D4285608A}";
-        const string PhotoViewerDll = "PhotoViewer.dll";
-        readonly static string PhotoGalleryPath = GetPhotoGalleryPath();
+        private const string PhotoGalleryGuid = "{FFE2A43C-56B9-4BF5-9A79-CC6D4285608A}";
+        private const string PhotoViewerDll = "PhotoViewer.dll";
+        private readonly static string PhotoGalleryPath = GetPhotoGalleryPath();
 
         public PhotoGalleryIntegrationRule()
             : base(Resources.PhotoGalleryIntegrationRule_Text)
         {
         }
 
-        static string GetPhotoGalleryPath()
+        private static string GetPhotoGalleryPath()
         {
             return string.Format(CultureInfo.InvariantCulture, "%ProgramFiles%\\Windows Photo {0}\\{1}",
                 Environment.OSVersion.Version.Major <= 6 && Environment.OSVersion.Version.Minor < 1 ? "Gallery" : "Viewer",

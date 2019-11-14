@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -18,7 +18,7 @@ using Microsoft.Test.Tools.WicCop.Rules.Wow;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
 {
-    class PixelFormatInfoRule : RuleBase<ComponentRuleGroup>, IWowRegistryChecked
+    internal class PixelFormatInfoRule : RuleBase<ComponentRuleGroup>, IWowRegistryChecked
     {
         public delegate uint GetPixelFormats(uint count, Guid[] array);
 
@@ -47,9 +47,9 @@ namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
             }
         }
 
-        static Guid[] GetAllPixelFormats()
+        private static Guid[] GetAllPixelFormats()
         {
-            List<Guid> res = new List<Guid>();
+            var res = new List<Guid>();
 
             IWICImagingFactory factory = (IWICImagingFactory)new WICImagingFactory();
             IEnumUnknown eu = factory.CreateComponentEnumerator(WICComponentType.WICPixelFormat, WICComponentEnumerateOptions.WICComponentEnumerateRefresh);
@@ -62,9 +62,8 @@ namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
                 hr = eu.Next(1, o, ref fetched);
                 if (fetched == 1)
                 {
-                    IWICPixelFormatInfo info = (IWICPixelFormatInfo)o[0];
-                    Guid guid;
-                    info.GetFormatGUID(out guid);
+                    var info = (IWICPixelFormatInfo)o[0];
+                    info.GetFormatGUID(out var guid);
                     res.Add(guid);
 
                     info.ReleaseComObject();
@@ -116,7 +115,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
             }
         }
 
-        void Check(MainForm form, IWICPixelFormatInfo2 info, object tag)
+        private void Check(MainForm form, IWICPixelFormatInfo2 info, object tag)
         {
             if (info.GetNumericRepresentation() == WICPixelFormatNumericRepresentation.WICPixelFormatNumericRepresentationUnspecified)
             {
@@ -125,7 +124,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
             Check(form, info as IWICPixelFormatInfo, tag);
         }
 
-        void Check(MainForm form, IWICPixelFormatInfo info, object tag)
+        private void Check(MainForm form, IWICPixelFormatInfo info, object tag)
         {
             uint bpp = info.GetBitsPerPixel();
             if (bpp == 0)

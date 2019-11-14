@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -22,24 +22,21 @@ namespace Microsoft.Test.Tools.WicCop
     [Serializable]
     public struct DataEntry
     {
-        readonly static Dictionary<Guid, string> knownGuids = GetKnown();
-
-        readonly string text;
-        readonly object value;
+        private static readonly Dictionary<Guid, string> knownGuids = GetKnown();
 
         public DataEntry(string text, object value)
         {
-            this.text = text;
-            this.value = value;
+            this.Text = text;
+            this.Value = value;
             if (value != null)
             {
-                if (value.GetType() == typeof(Guid))
+                if (value is Guid guid)
                 {
-                    this.value = GetValue((Guid)value);
+                    this.Value = GetValue(guid);
                 }
                 else if (value.GetType() == typeof(Guid[]))
                 {
-                    this.value = Array.ConvertAll<Guid, object>(value as Guid[], GetValue);
+                    this.Value = Array.ConvertAll<Guid, object>(value as Guid[], GetValue);
                 }
             }
         }
@@ -69,9 +66,9 @@ namespace Microsoft.Test.Tools.WicCop
         {
         }
 
-        static Dictionary<Guid, string> GetKnown()
+        private static Dictionary<Guid, string> GetKnown()
         {
-            Dictionary<Guid, string> res = new Dictionary<Guid, string>();
+            var res = new Dictionary<Guid, string>();
 
             foreach (ReservedGuids.ReservedGuid r in ReservedGuids.Instance.Items)
             {
@@ -89,21 +86,17 @@ namespace Microsoft.Test.Tools.WicCop
             return res;
         }
 
-        static object GetValue(Guid value)
+        private static object GetValue(Guid value)
         {
-            string res;
-
-            if (knownGuids.TryGetValue(value, out res))
+            if (knownGuids.TryGetValue(value, out var res))
             {
                 return res;
             }
-            else
-            {
-                return value;
-            }
+
+            return value;
         }
 
-        static object GetValue(Exception value)
+        private static object GetValue(Exception value)
         {
             int hr = Marshal.GetHRForException(value);
 
@@ -111,31 +104,25 @@ namespace Microsoft.Test.Tools.WicCop
             {
                 return (WinCodecError)hr;
             }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "0x{0:X}", hr);
-            }
+
+            return string.Format(CultureInfo.InvariantCulture, "0x{0:X}", hr);
         }
 
         public string Text
         {
-            get { return text; }
+            get;
         }
 
         public object Value
         {
-            get { return value; }
+            get;
         }
 
         public void WriteTo(XmlWriter xw)
         {
             xw.WriteStartElement("Entry");
             xw.WriteAttributeString("text", Text);
-            Array a = Value as Array;
-            if (a == null)
-            {
-                a = new object[] { Value };
-            }
+            var a = Value as Array ?? new[] { Value };
             foreach (object o in a)
             {
                 xw.WriteStartElement("Value");

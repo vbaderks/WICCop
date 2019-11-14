@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -18,9 +18,9 @@ using Microsoft.Test.Tools.WicCop.Properties;
 
 namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
 {
-    abstract class DecoderRuleBase : RuleBase<ComponentRuleGroup>
+    internal abstract class DecoderRuleBase : RuleBase<ComponentRuleGroup>
     {
-        readonly static WinCodecError[] queryCapabilitiesErrors = new WinCodecError[] 
+        private readonly static WinCodecError[] queryCapabilitiesErrors = new WinCodecError[] 
         {
             WinCodecError.WINCODEC_ERR_COMPONENTNOTFOUND,
             WinCodecError.WINCODEC_ERR_BADIMAGE,
@@ -38,7 +38,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
         {
         }
 
-        IEnumerable<string> GetDecodableFiles(MainForm form, Guid decoderClsid)
+        private IEnumerable<string> GetDecodableFiles(MainForm form, Guid decoderClsid)
         {
             IWICImagingFactory factory = (IWICImagingFactory)new WICImagingFactory();
             IWICBitmapDecoderInfo info = null;

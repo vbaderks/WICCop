@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -20,11 +20,9 @@ namespace Microsoft.Test.Tools.WicCop
     [TypeConverter(typeof(DataEntryCollectionConverter))]
     public class DataEntryCollection : List<DataEntry>
     {
-        readonly RuleBase parent;
-
         public DataEntryCollection(RuleBase parent, params DataEntry[][] entries)
         {
-            this.parent = parent;
+            Parent = parent;
 
             foreach (DataEntry[] array in entries)
             {
@@ -34,7 +32,7 @@ namespace Microsoft.Test.Tools.WicCop
 
         public RuleBase Parent
         {
-            get { return parent; }
+            get;
         }
 
         public void WriteTo(XmlWriter xw)
