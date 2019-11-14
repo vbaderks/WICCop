@@ -100,7 +100,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
 
                         List<Guid> allPixelFormats = new List<Guid>(PixelFormatInfoRule.AllPixelFormats);
                         allPixelFormats.Add(Consts.GUID_WICPixelFormatDontCare);
-                        
+
                         foreach (Guid g in allPixelFormats)
                         {
                             pixelFormat = g;
@@ -141,7 +141,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
                             {
                                 form.Add(this, e.TargetSite.ToString(Resources._0_Failed), new DataEntry(Resources.FrameIndex, 1), new DataEntry(e));
                             }
-                            else 
+                            else
                             {
                                 form.CheckHRESULT(this, WinCodecError.WINCODEC_ERR_UNSUPPORTEDOPERATION, e, new DataEntry(Resources.FrameIndex, 1));
                             }
@@ -165,12 +165,10 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
             return base.ProcessEncoder(form, encoder, tag);
         }
 
-        #region IWowRegistryChecked Members
         IEnumerable<string> IWowRegistryChecked.GetKeys()
         {
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}", Parent.Clsid);
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}\\Instance\\{{{1}}}", Consts.CATID_WICBitmapEncoders, Parent.Clsid);
         }
-        #endregion
     }
 }

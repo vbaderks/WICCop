@@ -28,8 +28,6 @@ namespace Microsoft.Test.Tools.WicCop
             logoPictureBox.Image = Resources.WICCop.ToBitmap();
         }
 
-        #region Assembly Attribute Accessors
-
         public string AssemblyTitle
         {
             get
@@ -106,7 +104,5 @@ namespace Microsoft.Test.Tools.WicCop
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
-
     }
 }

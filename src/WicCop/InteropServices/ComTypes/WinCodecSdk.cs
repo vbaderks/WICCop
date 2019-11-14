@@ -56,7 +56,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICMetadataBlockWriter : IWICMetadataBlockReader
     {
-        #region IWICMetadataBlockReader
         new void GetContainerFormat(
             out Guid pguidContainerFormat
             );
@@ -68,7 +67,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             );
 
         new IEnumUnknown GetEnumerator();
-        #endregion
 
         void InitializeFromBlockReader(
             IWICMetadataBlockReader pIMDBlockReader
@@ -83,7 +81,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             );
 
         void SetWriterByIndex(
-            uint nIndex, 
+            uint nIndex,
             IWICMetadataWriter pIMetadataWriter
             );
 
@@ -142,7 +140,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICMetadataWriter : IWICMetadataReader
     {
-        #region IWICMetadataReader
         new void GetMetadataFormat(
             out Guid pguidMetadataFormat
             );
@@ -180,7 +177,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             );
 
         new IWICEnumMetadataItem GetEnumerator();
-        #endregion
 
         void SetValue(
             [In]
@@ -242,7 +238,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICMetadataHandlerInfo : IWICComponentInfo
     {
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -253,7 +248,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         new uint GetAuthor(
             uint cchAuthor,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzAuthor
             );
 
@@ -263,22 +258,21 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         new uint GetVersion(
             uint cchVersion,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzVersion
             );
 
         new uint GetSpecVersion(
             uint cchSpecVersion,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzSpecVersion
             );
 
         new uint GetFriendlyName(
             uint cchFriendlyName,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzFriendlyName
             );
-        #endregion
 
         void GetMetadataFormat(
             out Guid pguidMetadataFormat
@@ -287,19 +281,19 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         uint GetContainerFormats(
             uint cContainerFormats,
             [Out]
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)]
             Guid[] pguidContainerFormats
             );
 
         uint GetDeviceManufacturer(
             uint cchDeviceManufacturer,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzDeviceManufacturer
             );
 
         uint GetDeviceModels(
             uint cchDeviceModels,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]  
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzDeviceModels
             );
 
@@ -327,8 +321,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICMetadataReaderInfo : IWICMetadataHandlerInfo
     {
-        #region IWICMetadataHandlerInfo
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -339,7 +331,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         new uint GetAuthor(
             uint cchAuthor,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzAuthor
             );
 
@@ -349,22 +341,21 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         new uint GetVersion(
             uint cchVersion,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzVersion
             );
 
         new uint GetSpecVersion(
             uint cchSpecVersion,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzSpecVersion
             );
 
         new uint GetFriendlyName(
             uint cchFriendlyName,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzFriendlyName
             );
-        #endregion
 
         new void GetMetadataFormat(
             out Guid pguidMetadataFormat
@@ -397,7 +388,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         [return: MarshalAs(UnmanagedType.Bool)]
         new bool DoesRequireFixedSize();
-        #endregion
 
         uint GetPatterns(
             [MarshalAs(UnmanagedType.LPStruct)]
@@ -409,7 +399,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         [return: MarshalAs(UnmanagedType.Bool)]
         bool MatchesPattern(
-            [MarshalAs(UnmanagedType.LPStruct)] 
+            [MarshalAs(UnmanagedType.LPStruct)]
             Guid guidContainerFormat,
             IStream pIStream
             );
@@ -430,8 +420,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICMetadataWriterInfo : IWICMetadataHandlerInfo
     {
-        #region IWICMetadataHandlerInfo
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -442,7 +430,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         new uint GetAuthor(
             uint cchAuthor,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzAuthor
             );
 
@@ -450,22 +438,21 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         new uint GetVersion(
             uint cchVersion,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzVersion
             );
 
         new uint GetSpecVersion(
             uint cchSpecVersion,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzSpecVersion
             );
 
         new uint GetFriendlyName(
             uint cchFriendlyName,
-            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)] 
+            [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 1)]
             StringBuilder wzFriendlyName
             );
-        #endregion
 
         new void GetMetadataFormat(
             out Guid pguidMetadataFormat
@@ -498,10 +485,9 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         [return: MarshalAs(UnmanagedType.Bool)]
         new bool DoesRequireFixedSize();
-        #endregion
 
         uint GetHeader(
-            [MarshalAs(UnmanagedType.LPStruct)] 
+            [MarshalAs(UnmanagedType.LPStruct)]
             Guid guidContainerFormat,
             uint cbSize,
             IntPtr pHeader
@@ -515,7 +501,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICComponentFactory : IWICImagingFactory
     {
-        #region IWICImagingFactory
         new IWICBitmapDecoder CreateDecoderFromFilename(
             [MarshalAs(UnmanagedType.LPWStr)]
             string wzFilename,
@@ -598,11 +583,11 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         new IWICBitmap CreateBitmapFromMemory(
             uint uiWidth,
             uint uiHeight,
-            [MarshalAs(UnmanagedType.LPStruct)] 
+            [MarshalAs(UnmanagedType.LPStruct)]
             Guid pixelFormat,
             uint cbStride,
             uint cbBufferSize,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)] 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)]
             byte[] pbBuffer
             );
 
@@ -641,13 +626,12 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeConst = 1)]
             Guid[] pguidVendor
             );
-        #endregion
 
         IWICMetadataReader CreateMetadataReader(
             [In]
-            [MarshalAs(UnmanagedType.LPStruct)] 
+            [MarshalAs(UnmanagedType.LPStruct)]
             Guid guidMetadataFormat,
-            [In] 
+            [In]
             ref Guid pguidVendor,
             uint dwOptions,
             IStream pIStream
@@ -665,9 +649,9 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         IWICMetadataWriter CreateMetadataWriter(
             [In]
-            [MarshalAs(UnmanagedType.LPStruct)] 
+            [MarshalAs(UnmanagedType.LPStruct)]
             Guid guidMetadataFormat,
-            [In] 
+            [In]
             ref Guid pguidVendor,
             uint dwMetadataOptions
             );
@@ -675,22 +659,22 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         IWICMetadataWriter CreateMetadataWriterFromReader(
             [In]
             IWICMetadataReader pIReader,
-            [In] 
+            [In]
             ref Guid pguidVendor
             );
 
         IWICMetadataQueryReader CreateQueryReaderFromBlockReader(
-            [In] 
+            [In]
             IWICMetadataBlockReader pIBlockReader
             );
 
         IWICMetadataQueryWriter CreateQueryWriterFromBlockWriter(
-            [In] 
+            [In]
             IWICMetadataBlockWriter pIBlockWriter
             );
 
         IPropertyBag2 CreateEncoderPropertyBag(
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             PROPBAG2[] ppropOptions,
             uint cCount
             );

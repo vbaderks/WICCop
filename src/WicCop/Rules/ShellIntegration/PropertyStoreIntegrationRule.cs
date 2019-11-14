@@ -89,7 +89,6 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
             }
         }
 
-        #region IWowRegistryChecked Members
         IEnumerable<string> IWowRegistryChecked.GetKeys()
         {
             string res = Registry.GetValue(string.Format(CultureInfo.InvariantCulture, "{0}\\{1}", Registry.LocalMachine, PropertyHandler), null, null) as string;
@@ -98,6 +97,5 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
                 yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{0}", res);
             }
         }
-        #endregion
     }
 }

@@ -21,7 +21,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.FormatConverter
 {
     class FormatConverterInfoRule : RuleBase<ComponentRuleGroup>, IWowRegistryChecked
     {
-        static readonly Guid[] canonical = new Guid[] 
+        static readonly Guid[] canonical = new Guid[]
         {
             Consts.GUID_WICPixelFormat32bppBGRA,
             Consts.GUID_WICPixelFormat64bppRGBA,
@@ -133,12 +133,10 @@ namespace Microsoft.Test.Tools.WicCop.Rules.FormatConverter
             ComponentInfoHelper.Check<IWICFormatConverterInfo, object>(form, Parent.Clsid, Check, tag, this, true);
         }
 
-        #region IWowRegistryChecked Members
         IEnumerable<string> IWowRegistryChecked.GetKeys()
         {
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}", Parent.Clsid);
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}\\Instance\\{{{1}}}", Consts.CATID_WICFormatConverters, Parent.Clsid);
         }
-        #endregion
     }
 }

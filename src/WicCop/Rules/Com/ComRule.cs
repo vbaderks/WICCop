@@ -53,11 +53,9 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Com
             }
         }
 
-        #region IWowRegistryChecked Members
         IEnumerable<string> IWowRegistryChecked.GetKeys()
         {
             yield return ClsidKey;
         }
-        #endregion
     }
 }

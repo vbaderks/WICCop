@@ -158,12 +158,10 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Decoder
             return true;
         }
 
-        #region IWowRegistryChecked Members
         IEnumerable<string> IWowRegistryChecked.GetKeys()
         {
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}", Parent.Clsid);
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}\\Instance\\{{{1}}}", Consts.CATID_WICBitmapDecoders, Parent.Clsid);
         }
-        #endregion
     }
 }

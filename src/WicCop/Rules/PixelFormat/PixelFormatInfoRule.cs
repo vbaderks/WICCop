@@ -213,12 +213,10 @@ namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
             }
         }
 
-        #region IWowRegistryChecked Members
         IEnumerable<string> IWowRegistryChecked.GetKeys()
         {
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}", Parent.Clsid);
             yield return string.Format(CultureInfo.InvariantCulture, "CLSID\\{{{0}}}\\Instance\\{{{1}}}", Consts.CATID_WICPixelFormats, Parent.Clsid);
         }
-        #endregion
     }
 }

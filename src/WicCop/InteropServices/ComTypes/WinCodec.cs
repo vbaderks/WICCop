@@ -81,10 +81,10 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     {
         [PreserveSig]
         int Next(
-            uint celt, 
+            uint celt,
             [Out]
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.IUnknown)]
-            object[] rgelt, 
+            object[] rgelt,
             ref uint celtFetched
             );
 
@@ -163,8 +163,8 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     {
         void AddError(
             [MarshalAs(UnmanagedType.LPWStr)]
-            string pszPropName, 
-            [In] 
+            string pszPropName,
+            [In]
             ref EXCEPINFO pExcepInfo
             );
     }
@@ -705,7 +705,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICFormatConverter : IWICBitmapSource
     {
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -732,7 +731,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         void Initialize(
             IWICBitmapSource pISource,
@@ -758,7 +756,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmapScaler : IWICBitmapSource
     {
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -785,7 +782,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         void Initialize(
             IWICBitmapSource pISource,
@@ -800,7 +796,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmapClipper : IWICBitmapSource
     {
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -827,7 +822,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         void Initialize(
             IWICBitmapSource pISource,
@@ -840,7 +834,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmapFlipRotator : IWICBitmapSource
     {
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -867,7 +860,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         void Initialize(
             IWICBitmapSource pISource,
@@ -902,7 +894,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmap : IWICBitmapSource
     {
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -929,7 +920,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         IWICBitmapLock Lock(
             WICRect prcLock,
@@ -978,7 +968,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             uint cbBuffer,
             [In]
             [Out]
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)]
             byte[] pbBuffer
             );
 
@@ -990,7 +980,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICColorTransform : IWICBitmapSource
     {
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -1017,7 +1006,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         void Initialize(
             IWICBitmapSource pIBitmapSource,
@@ -1043,25 +1031,24 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICStream : IStream
     {
-        #region IStream
         new void Read(
             [Out]
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] 
-            byte[] pv, 
-            int cb, 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)]
+            byte[] pv,
+            int cb,
             IntPtr pcbRead
             );
 
         new void Write(
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] 
-            byte[] pv, 
-            int cb, 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)]
+            byte[] pv,
+            int cb,
             IntPtr pcbWritten
             );
 
         new void Seek(
-            long dlibMove, 
-            int dwOrigin, 
+            long dlibMove,
+            int dwOrigin,
             IntPtr plibNewPosition
             );
 
@@ -1070,9 +1057,9 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             );
 
         new void CopyTo(
-            IStream pstm, 
-            long cb, 
-            IntPtr pcbRead, 
+            IStream pstm,
+            long cb,
+            IntPtr pcbRead,
             IntPtr pcbWritten
             );
 
@@ -1083,26 +1070,25 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         new void Revert();
 
         new void LockRegion(
-            long libOffset, 
-            long cb, 
+            long libOffset,
+            long cb,
             int dwLockType
             );
 
         new void UnlockRegion(
-            long libOffset, 
-            long cb, 
+            long libOffset,
+            long cb,
             int dwLockType
             );
 
         new void Stat(
-            out STATSTG pstatstg, 
+            out STATSTG pstatstg,
             int grfStatFlag
             );
 
         new void Clone(
             out IStream ppstm
             );
-        #endregion IStream
 
         void InitializeFromIStream(
             IStream pIStream
@@ -1188,7 +1174,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICMetadataQueryWriter : IWICMetadataQueryReader
     {
-        #region IWICMetadataQueryReader
         new void GetContainerFormat(
             out Guid pguidContainerFormat
             );
@@ -1207,7 +1192,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             );
 
         new IEnumString GetEnumerator();
-        #endregion
 
         void SetMetadataByName(
             [MarshalAs(UnmanagedType.LPWStr)]
@@ -1259,7 +1243,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         void CreateNewFrame(
             out IWICBitmapFrameEncode ppIFrameEncode,
-            [In] 
+            [In]
             [Out]
             [MarshalAs(UnmanagedType.LPArray, SizeConst = 1)]
             IPropertyBag2[] encoderOptions
@@ -1409,7 +1393,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmapFrameDecode : IWICBitmapSource
     {
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -1436,7 +1419,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         IWICMetadataQueryReader GetMetadataQueryReader();
 
@@ -1519,7 +1501,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICFormatConverterInfo : IWICComponentInfo
     {
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -1556,7 +1537,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 0)]
             StringBuilder wzFriendlyName
             );
-        #endregion IWICComponentInfo
 
         uint GetPixelFormats(
             uint cFormats,
@@ -1574,7 +1554,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmapCodecInfo : IWICComponentInfo
     {
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -1610,7 +1589,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 0)]
             StringBuilder wzFriendlyName
             );
-        #endregion IWICComponentInfo
 
         void GetContainerFormat(
             out Guid pguidContainerFormat
@@ -1678,8 +1656,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmapEncoderInfo : IWICBitmapCodecInfo
     {
-        #region IWICBitmapCodecInfo
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -1716,7 +1692,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 0)]
             StringBuilder wzFriendlyName
             );
-        #endregion IWICComponentInfo
 
         new void GetContainerFormat(
             out Guid pguidContainerFormat
@@ -1777,7 +1752,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr)]
             string wzMimeType
             );
-        #endregion IWICBitmapCodecInfo
 
         IWICBitmapEncoder CreateInstance();
     };
@@ -1787,8 +1761,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICBitmapDecoderInfo : IWICBitmapCodecInfo
     {
-        #region IWICBitmapCodecInfo
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -1824,7 +1796,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 0)]
             StringBuilder wzFriendlyName
             );
-        #endregion IWICComponentInfo
 
         new void GetContainerFormat(
             out Guid pguidContainerFormat
@@ -1885,7 +1856,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr)]
             string wzMimeType
             );
-        #endregion IWICBitmapCodecInfo
 
         uint GetPatterns(
             uint cbSizePatterns,
@@ -1906,7 +1876,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICPixelFormatInfo : IWICComponentInfo
     {
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -1942,7 +1911,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 0)]
             StringBuilder wzFriendlyName
             );
-        #endregion IWICComponentInfo
 
         void GetFormatGUID(
             out Guid pFormat
@@ -2227,8 +2195,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICDevelopRaw : IWICBitmapFrameDecode
     {
-        #region IWICBitmapFrameDecode
-        #region IWICBitmapSource
         new void GetSize(
             out uint puiWidth,
             out uint puiHeight
@@ -2255,7 +2221,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
             byte[] pbBuffer
             );
-        #endregion IWICBitmapSource
 
         new IWICMetadataQueryReader GetMetadataQueryReader();
 
@@ -2268,7 +2233,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             );
 
         new IWICBitmapSource GetThumbnail();
-        #endregion  IWICBitmapFrameDecode
 
         void QueryRawCapabilitiesInfo(
             ref WICRawCapabilitiesInfo pInfo
@@ -2287,14 +2251,14 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         double GetExposureCompensation();
 
         void SetWhitePointRGB(
-            uint Red, 
-            uint Green, 
+            uint Red,
+            uint Green,
             uint Blue
             );
 
         void GetWhitePointRGB(
-            out uint pRed, 
-            out uint pGreen, 
+            out uint pRed,
+            out uint pGreen,
             out uint pBlue
             );
 
@@ -2312,7 +2276,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 
         void GetKelvinRangeInfo(
             out uint pMinKelvinTemp,
-            out uint pMaxKelvinTemp, 
+            out uint pMaxKelvinTemp,
             out uint pKelvinTempStepValue
             );
 
@@ -2357,12 +2321,12 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             );
 
         void SetToneCurve(
-            uint cbToneCurveSize, 
+            uint cbToneCurveSize,
             IntPtr pToneCurve
             );
 
         uint GetToneCurve(
-            uint cbToneCurveBufferSize, 
+            uint cbToneCurveBufferSize,
             IntPtr pToneCurve
             );
 
@@ -2492,8 +2456,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     [ComImport]
     public interface IWICPixelFormatInfo2 : IWICPixelFormatInfo
     {
-        #region IWICPixelFormatInfo
-        #region IWICComponentInfo
         new WICComponentType GetComponentType();
 
         new void GetCLSID(
@@ -2529,7 +2491,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 0)]
             StringBuilder wzFriendlyName
             );
-        #endregion IWICComponentInfo
 
         new void GetFormatGUID(
             out Guid pFormat
@@ -2549,7 +2510,6 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)]
             byte[] pbMaskBuffer
             );
-        #endregion IWICPixelFormatInfo
 
         [return: MarshalAs(UnmanagedType.Bool)]
         bool SupportsTransparency();
