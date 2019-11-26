@@ -15,5 +15,8 @@
     <!-- Define treat warnings as errors for C# projects -->
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+
   </PropertyGroup>
 </Project>
