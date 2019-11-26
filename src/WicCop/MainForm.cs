@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -8,6 +8,7 @@
 //----------------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -161,7 +162,6 @@ namespace Microsoft.Test.Tools.WicCop
             node.Nodes.Add(new BitmapFrameEncode());
         }
 
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -217,29 +217,28 @@ namespace Microsoft.Test.Tools.WicCop
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (Form f = new OptionsForm(shellIntegrationRuleGroup.Nodes))
+            using (var f = new OptionsForm(shellIntegrationRuleGroup.Nodes))
             {
                 f.ShowDialog(this);
             }
-            if (remote != null)
-            {
-                remote.SetFiles(Settings.Default.Files);
-            }
+
+            remote?.SetFiles(Settings.Default.Files);
         }
 
         private void messagesListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (messagesListView.SelectedItems.Count > 0)
             {
-                new MessageForm(messagesListView.SelectedItems[0] as Message).Show(this);
+                using var form = new MessageForm(messagesListView.SelectedItems[0] as Message);
+                form.Show(this);
             }
         }
 
-        private bool Run(TreeNodeCollection colection)
+        private bool Run(IEnumerable collection)
         {
             bool res = false;
 
-            foreach (RuleBase rule in colection)
+            foreach (RuleBase rule in collection)
             {
                 if (rule.Checked)
                 {
@@ -319,7 +318,7 @@ namespace Microsoft.Test.Tools.WicCop
 
         internal void Add(RuleBase parent, string text, params DataEntry[] data)
         {
-            Add(parent, text, data, new DataEntry[0]);
+            Add(parent, text, data, Array.Empty<DataEntry>());
         }
 
         internal void Add(RuleBase parent, string text, DataEntry[] de, params DataEntry[] data)

@@ -14,7 +14,7 @@ namespace Microsoft.Test.Tools.WicCop
 {
     internal static class Program
     {
-        internal static bool NoWow { get; set; }
+        internal static bool NoWow { get; private set; }
 
         [STAThread]
         private static void Main(string[] args)
@@ -23,7 +23,9 @@ namespace Microsoft.Test.Tools.WicCop
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(false));
+
+            using var form = new MainForm(false);
+            Application.Run(form);
         }
     }
 }

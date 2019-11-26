@@ -37,10 +37,8 @@ namespace Microsoft.Test.Tools.WicCop
 
                 return sb.ToString();
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            return string.Empty;
         }
 
         public static string ToString(this Delegate method, string format)
@@ -99,26 +97,26 @@ namespace Microsoft.Test.Tools.WicCop
             {
                 return right == null;
             }
-            else if (right == null)
-            {
-                return false;
-            }
-            else if (left.Length != right.Length)
-            {
-                return false;
-            }
-            else
-            {
-                for (int i = 0; i < left.Length; i++)
-                {
-                    if (!left[i].Equals(right[i]))
-                    {
-                        return false;
-                    }
-                }
 
-                return true;
+            if (right == null)
+            {
+                return false;
             }
+
+            if (left.Length != right.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < left.Length; i++)
+            {
+                if (!left[i].Equals(right[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private static Guid GetGuid(GetGuidMethod method)
@@ -177,7 +175,7 @@ namespace Microsoft.Test.Tools.WicCop
         {
             IWICComponentInfo l = left as IWICComponentInfo;
 
-            List<DataEntry[]> res = new List<DataEntry[]>(l.CompareInfos(right));
+            var res = new List<DataEntry[]>(l.CompareInfos(right));
 
             Check<bool>(left.DoesSupportAnimation, right.DoesSupportAnimation, res);
             Check<bool>(left.DoesSupportChromakey, right.DoesSupportChromakey, res);
@@ -194,15 +192,15 @@ namespace Microsoft.Test.Tools.WicCop
             return res.ToArray();
         }
 
-        private static DataEntry[][] CompareInfos(this IWICComponentInfo left, IWICComponentInfo right)
+        private static IEnumerable<DataEntry[]> CompareInfos(this IWICComponentInfo left, IWICComponentInfo right)
         {
-            List<DataEntry[]> res = new List<DataEntry[]>();
+            var res = new List<DataEntry[]>();
 
             Check(left.GetAuthor, right.GetAuthor, res);
             Check(left.GetCLSID, right.GetCLSID, res);
-            Check<WICComponentType>(left.GetComponentType, right.GetComponentType, res);
+            Check(left.GetComponentType, right.GetComponentType, res);
             Check(left.GetFriendlyName, right.GetFriendlyName, res);
-            Check<WICComponentSigning>(left.GetSigningStatus, right.GetSigningStatus, res);
+            Check(left.GetSigningStatus, right.GetSigningStatus, res);
             Check(left.GetSpecVersion, right.GetSpecVersion, res);
             Check(left.GetVendorGUID, right.GetVendorGUID, res);
             Check(left.GetVersion, right.GetVersion, res);

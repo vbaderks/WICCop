@@ -37,11 +37,11 @@ namespace Microsoft.Test.Tools.WicCop
             }
         }
 
-        private MainForm form = new MainForm(true);
+        private readonly MainForm form = new MainForm(true);
 
         public const string ObjectName = "Remote";
 
-        private ManualResetEvent ev = new ManualResetEvent(false);
+        private readonly ManualResetEvent ev = new ManualResetEvent(false);
 
         public void Exit()
         {
@@ -67,24 +67,21 @@ namespace Microsoft.Test.Tools.WicCop
             {
                 return null;
             }
-            else
+
+            rule.Run(form);
+
+            var res = new List<MessageInfo>();
+            foreach (Message m in form.Messages)
             {
-                rule.Run(form);
-
-                List<MessageInfo> res = new List<MessageInfo>();
-                foreach (Message m in form.Messages)
-                {
-                    Console.WriteLine(m);
-                    res.Add(new MessageInfo(m));
-                }
-                form.Messages.Clear();
-
-
-                return res.ToArray();
+                Console.WriteLine(m);
+                res.Add(new MessageInfo(m));
             }
+            form.Messages.Clear();
+
+            return res.ToArray();
         }
 
-        public KeyValuePair<Guid, string>[] GetComponentInfoPairs(WICComponentType type)
+        public IEnumerable<KeyValuePair<Guid, string>> GetComponentInfoPairs(WICComponentType type)
         {
             return AllComponentsRuleGroup.GetComponentInfoPairs(type, null).ToArray();
         }

@@ -28,10 +28,7 @@ namespace Microsoft.Test.Tools.WicCop
                 this.rule = rule;
             }
 
-            public override bool IsReadOnly
-            {
-                get { return true; }
-            }
+            public override bool IsReadOnly => true;
 
             public override object GetValue(object component)
             {
@@ -43,17 +40,15 @@ namespace Microsoft.Test.Tools.WicCop
                 throw new NotImplementedException();
             }
 
-            public override string Category
-            {
-                get { return rule.FullPath; }
-            }
+            public override string Category => rule.FullPath;
         }
 
         public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
         {
-            var d = value as DataEntryCollection;
+            var d = (DataEntryCollection) value;
 
-            return new PropertyDescriptorCollection(Array.ConvertAll<DataEntry, DataEntryPropertyDescriptor>(d.ToArray(), delegate(DataEntry input) { return new DataEntryPropertyDescriptor(input, d.Parent); }), true);
+            return new PropertyDescriptorCollection(Array.ConvertAll(d.ToArray(),
+                input => new DataEntryPropertyDescriptor(input, d.Parent)), true);
         }
 
         public override bool GetPropertiesSupported(ITypeDescriptorContext context)

@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // THIS CODE AND INFORMATION IS PROVIDED "AS-IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
@@ -170,7 +170,7 @@ namespace Microsoft.Test.Tools.WicCop
                     value = getter();
                 }
             }
-            catch 
+            catch
             {
             }
 
@@ -211,7 +211,7 @@ namespace Microsoft.Test.Tools.WicCop
             if (raw != null)
             {
                 WICRawCapabilitiesInfo capabilities = new WICRawCapabilitiesInfo();
-                capabilities.cbSize = (uint)Marshal.SizeOf(capabilities); 
+                capabilities.cbSize = (uint)Marshal.SizeOf(capabilities);
                 raw.QueryRawCapabilitiesInfo(ref capabilities);
 
                 SetupTrackBar<double>(exposureTrackBar, GetValue<double>(Rules.Decoder.DevelopRawRule.GetSupported(capabilities.ExposureCompensationSupport), raw.GetExposureCompensation));
@@ -359,7 +359,7 @@ namespace Microsoft.Test.Tools.WicCop
             WICRawRenderMode renderMode = (WICRawRenderMode)renderModeComboBox.SelectedIndex;
 
             IWICDevelopRaw raw = frame as IWICDevelopRaw;
-            
+
             if (raw != null)
             {
                 ChangeValue<WICRawRenderMode>(raw.SetRenderMode, renderMode);

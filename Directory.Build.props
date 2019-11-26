@@ -18,5 +18,8 @@
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
 
+    <!-- Define the code analysis rule set that should be used for static checking and background checking in the IDE -->
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)WicCop.ruleset</CodeAnalysisRuleSet>
+
   </PropertyGroup>
 </Project>

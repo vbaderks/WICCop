@@ -42,7 +42,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
                 files = new TempFileCollection();
                 info = (IWICBitmapEncoderInfo)factory.CreateComponentInfo(Parent.Clsid);
 
-                do 
+                do
                 {
                     stream.ReleaseComObject();
                     encoder.ReleaseComObject();
@@ -69,6 +69,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.Encoder
                 encoder.ReleaseComObject();
                 stream.ReleaseComObject();
                 files?.Delete();
+                ((IDisposable)files)?.Dispose();
             }
         }
     }

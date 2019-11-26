@@ -81,38 +81,36 @@ namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
             {
                 form.Add(rule, Resources.NoPixelFormats);
 
-                return new Guid[0];
+                return Array.Empty<Guid>();
             }
-            else
+
+            Guid[] pixelFormats = new Guid[count];
+            method(count, pixelFormats);
+
+            var dups = new HashSet<Guid>();
+            var unknown = new HashSet<Guid>();
+            for (int i = 0; i < pixelFormats.Length; i++)
             {
-                Guid[] pixelFormats = new Guid[count];
-                method(count, pixelFormats);
-
-                HashSet<Guid> dups = new HashSet<Guid>();
-                HashSet<Guid> unknown = new HashSet<Guid>();
-                for (int i = 0; i < pixelFormats.Length; i++)
+                Guid g = pixelFormats[i];
+                if (Array.IndexOf(pixelFormats, g, i + 1) >= 0)
                 {
-                    Guid g = pixelFormats[i];
-                    if (Array.IndexOf(pixelFormats, g, i + 1) >= 0)
-                    {
-                        dups.Add(g);
-                    }
-                    if (Array.IndexOf(PixelFormatInfoRule.AllPixelFormats, g) < 0)
-                    {
-                        unknown.Add(g);
-                    }
+                    dups.Add(g);
                 }
-                if (unknown.Count > 0)
+                if (Array.IndexOf(AllPixelFormats, g) < 0)
                 {
-                    form.Add(rule, Resources.NonRegisteredPixelFormat, new DataEntry(Resources.PixelFormat, unknown.ToArray()));
+                    unknown.Add(g);
                 }
-                if (dups.Count > 0)
-                {
-                    form.Add(rule, Resources.DuplicatedPixelFormat, new DataEntry(Resources.PixelFormat, dups.ToArray()));
-                }
-
-                return pixelFormats;
             }
+            if (unknown.Count > 0)
+            {
+                form.Add(rule, Resources.NonRegisteredPixelFormat, new DataEntry(Resources.PixelFormat, unknown.ToArray()));
+            }
+            if (dups.Count > 0)
+            {
+                form.Add(rule, Resources.DuplicatedPixelFormat, new DataEntry(Resources.PixelFormat, dups.ToArray()));
+            }
+
+            return pixelFormats;
         }
 
         private void Check(MainForm form, IWICPixelFormatInfo2 info, object tag)
@@ -139,7 +137,7 @@ namespace Microsoft.Test.Tools.WicCop.Rules.PixelFormat
             }
 
             byte[][] channelMasks = new byte[count][];
-            Dictionary<int, List<uint>> dups = new Dictionary<int, List<uint>>();
+            var dups = new Dictionary<int, List<uint>>();
             byte[] fullMask = new byte[(bpp + 7) / 8];
             for (uint i = 0; i < count; i++)
             {

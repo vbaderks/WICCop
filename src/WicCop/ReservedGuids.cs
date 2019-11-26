@@ -10,7 +10,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace Microsoft.Test.Tools.WicCop
@@ -26,19 +25,14 @@ namespace Microsoft.Test.Tools.WicCop
             public string description;
         }
 
-        private readonly List<ReservedGuid> items = new List<ReservedGuid>();
-
-        readonly public static ReservedGuids Instance = Read();
+        public static readonly ReservedGuids Instance = Read();
 
         [XmlElement("Item")]
-        public List<ReservedGuid> Items
-        {
-            get { return items; }
-        }
+        public List<ReservedGuid> Items { get; } = new List<ReservedGuid>();
 
         public bool TryGetValue(Guid guid, out string value)
         {
-            foreach (ReservedGuid i in items)
+            foreach (ReservedGuid i in Items)
             {
                 if (i.guid == guid)
                 {
@@ -57,16 +51,14 @@ namespace Microsoft.Test.Tools.WicCop
         {
             Type thisType = typeof(ReservedGuids);
 
-            XmlSerializer xs = new XmlSerializer(thisType);
+            var xs = new XmlSerializer(thisType);
 
             foreach (string s in thisType.Assembly.GetManifestResourceNames())
             {
                 if (s.EndsWith(thisType.Name + ".xml"))
                 {
-                    using (Stream stream = thisType.Assembly.GetManifestResourceStream(s))
-                    {
-                        return xs.Deserialize(stream) as ReservedGuids;
-                    }
+                    using Stream stream = thisType.Assembly.GetManifestResourceStream(s);
+                    return xs.Deserialize(stream) as ReservedGuids;
                 }
             }
 

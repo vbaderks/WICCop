@@ -98,4 +98,10 @@
     <Compile Remove="Rules\Decoder\ShellIntegrationRuleBase.cs" />
     <Compile Remove="Rules\Decoder\ThumnailCacheIntegrationRule.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

@@ -476,6 +476,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICBitmapCacheOnLoad = 0x00000002,
     };
 
+    [Flags]
     public enum WICDecodeOptions : uint
     {
         WICDecodeMetadataCacheOnDemand = 0x00000000,
@@ -487,7 +488,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICBitmapEncoderCacheInMemory = 0x00000000,
         WICBitmapEncoderCacheTempFile = 0x00000001,
         WICBitmapEncoderNoCache = 0x00000002,
-    };
+    }
 
     [Flags]
     public enum WICComponentType : uint
@@ -499,15 +500,16 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICMetadataWriter = 0x00000010,
         WICPixelFormat = 0x00000020,
         WICAllComponents = 0x0000003F,
-    };
+    }
 
+    [Flags]
     public enum WICComponentEnumerateOptions : uint
     {
         WICComponentEnumerateDefault = 0x00000000,
         WICComponentEnumerateRefresh = 0x00000001,
         WICComponentEnumerateDisabled = 0x80000000,
         WICComponentEnumerateUnsigned = 0x40000000,
-    };
+    }
 
     public struct WICBitmapPattern
     {
@@ -517,7 +519,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         public IntPtr Mask;
         [MarshalAs(UnmanagedType.Bool)]
         public bool EndOfStream;
-    }  ;
+    }
 
     public enum WICBitmapInterpolationMode : uint
     {
@@ -525,7 +527,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICBitmapInterpolationModeLinear = 0x00000001,
         WICBitmapInterpolationModeCubic = 0x00000002,
         WICBitmapInterpolationModeFant = 0x00000003,
-    };
+    }
 
     public enum WICBitmapPaletteType : uint
     {
@@ -543,7 +545,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICBitmapPaletteTypeFixedGray4 = 0x0000000A,
         WICBitmapPaletteTypeFixedGray16 = 0x0000000B,
         WICBitmapPaletteTypeFixedGray256 = 0x0000000C
-    };
+    }
 
     public enum WICBitmapDitherType : uint
     {
@@ -557,14 +559,14 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICBitmapDitherTypeDualSpiral4x4 = 0x00000006,
         WICBitmapDitherTypeDualSpiral8x8 = 0x00000007,
         WICBitmapDitherTypeErrorDiffusion = 0x00000008,
-    };
+    }
 
     public enum WICBitmapAlphaChannelOption : uint
     {
         WICBitmapUseAlpha = 0x00000000,
         WICBitmapUsePremultipliedAlpha = 0x00000001,
         WICBitmapIgnoreAlpha = 0x00000002,
-    };
+    }
 
     [Flags]
     public enum WICBitmapTransformOptions : uint
@@ -2098,22 +2100,24 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICWhitePointCustom = 0x00000100,
         WICWhitePointAutoWhiteBalance = 0x00000200,
         WICWhitePointAsShot = WICWhitePointDefault,
-    };
+    }
 
+    [Flags]
     public enum WICRawCapabilities : uint
     {
         WICRawCapabilityNotSupported = 0x00000000,
         WICRawCapabilityGetSupported = 0x00000001,
         WICRawCapabilityFullySupported = 0x00000002
-    };
+    }
 
+    [Flags]
     public enum WICRawRotationCapabilities : uint
     {
         WICRawRotationCapabilityNotSupported = 0x00000000,
         WICRawRotationCapabilityGetSupported = 0x00000001,
         WICRawRotationCapabilityNinetyDegreesSupported = 0x00000002,
         WICRawRotationCapabilityFullySupported = 0x00000003
-    };
+    }
 
     public struct WICRawCapabilitiesInfo
     {
@@ -2135,7 +2139,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         public WICRawCapabilities ToneCurveSupport;
         public WICRawRotationCapabilities RotationSupport;
         public WICRawCapabilities RenderModeSupport;
-    };
+    }
 
     public enum WICRawParameterSet : uint
     {
@@ -2353,12 +2357,14 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
     {
     }
 
+    [Flags]
     public enum WIC8BIMIPTCProperties : uint
     {
         WIC8BIMIPTCPString = 0x00000001,
         WIC8BIMIPTCEmbeddedIPTC = 0x00000002
     }
 
+    [Flags]
     public enum WIC8BIMResolutionInfoProperties : uint
     {
         WIC8BIMResolutionInfoPString = 0x00000001,
@@ -2381,6 +2387,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICPngFilterAdaptive
     }
 
+    [Flags]
     public enum WICGifLogicalScreenDescriptorProperties : uint
     {
         WICGifLogicalScreenSignature = 0x0001,
@@ -2393,8 +2400,9 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICGifLogicalScreenDescriptorBackgroundColorIndex,
         WICGifLogicalScreenDescriptorPixelAspectRatio,
         WICGifLogicalScreenDescriptorMax
-    };
+    }
 
+    [Flags]
     public enum WICGifImageDescriptorProperties : uint
     {
         WICGifImageDescriptorLeft = 0x0001,
@@ -2406,8 +2414,9 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICGifImageDescriptorSortFlag,
         WICGifImageDescriptorLocalColorTableSize,
         WICGifImageDescriptorMax
-    };
+    }
 
+    [Flags]
     public enum WICGifGraphicControlExtensionProperties : uint
     {
         WICGifGraphicControlExtensionDisposal = 0x0001,
@@ -2416,8 +2425,9 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICGifGraphicControlExtensionDelay,
         WICGifGraphicControlExtensionTransparentColorIndex,
         WICGifGraphicControlExtensionMax
-    };
+    }
 
+    [Flags]
     public enum WICGifApplicationExtensionProperties : uint
     {
         WICGifApplicationExtensionApplication = 0x0001,

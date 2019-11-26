@@ -26,17 +26,17 @@ namespace Microsoft.Test.Tools.WicCop
 
         public DataEntry(string text, object value)
         {
-            this.Text = text;
-            this.Value = value;
+            Text = text;
+            Value = value;
             if (value != null)
             {
                 if (value is Guid guid)
                 {
-                    this.Value = GetValue(guid);
+                    Value = GetValue(guid);
                 }
                 else if (value.GetType() == typeof(Guid[]))
                 {
-                    this.Value = Array.ConvertAll<Guid, object>(value as Guid[], GetValue);
+                    Value = Array.ConvertAll(value as Guid[], GetValue);
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace Microsoft.Test.Tools.WicCop
 
         private static object GetValue(Guid value)
         {
-            if (knownGuids.TryGetValue(value, out var res))
+            if (knownGuids.TryGetValue(value, out string res))
             {
                 return res;
             }

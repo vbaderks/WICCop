@@ -21,6 +21,11 @@ csharp_new_line_before_open_brace = control_blocks, types, methods, object_colle
 csharp_indent_case_contents = true
 csharp_indent_switch_labels = true
 
+# only use var when it's obvious what the variable type is
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:silent
+csharp_style_var_elsewhere = false:silent
+
 # Space preferences
 csharp_space_after_cast = false
 csharp_space_after_colon_in_inheritance_clause = true
@@ -38,8 +43,6 @@ csharp_style_expression_bodied_constructors = false:suggestion
 csharp_style_expression_bodied_methods = false:suggestion
 csharp_style_expression_bodied_properties = true:suggestion
 csharp_style_inlined_variable_declaration = false:suggestion
-csharp_style_var_for_built_in_types = true:suggestion
-csharp_style_var_when_type_is_apparent = true:suggestion
 
 dotnet_sort_system_directives_first = true
 

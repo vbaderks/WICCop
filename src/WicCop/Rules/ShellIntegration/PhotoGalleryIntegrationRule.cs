@@ -63,19 +63,19 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
                     CheckValue(form, r, null, new string[] { PhotoGalleryGuid }, de);
                 }
 
-                using (RegistryKey r = OpenSubKey(form, Registry.ClassesRoot, progid, new DataEntry[0]))
+                using (RegistryKey r = OpenSubKey(form, Registry.ClassesRoot, progid, Array.Empty<DataEntry>()))
                 {
                     CheckStringValue(form, r, null, de);
 
-                    using (RegistryKey r1 = OpenSubKey(form, r, "DefaultIcon", new DataEntry[0]))
+                    using (RegistryKey r1 = OpenSubKey(form, r, "DefaultIcon", Array.Empty<DataEntry>()))
                     {
                         string iconPath = CheckStringValue(form, r1, null, de);
                         if (!string.IsNullOrEmpty(iconPath))
                         {
-                            using (TempFileCollection t = new TempFileCollection())
+                            using (var t = new TempFileCollection())
                             {
                                 string file = t.AddExtension(ext);
-                                File.WriteAllBytes(file, new byte[0]);
+                                File.WriteAllBytes(file, Array.Empty<byte>());
                                 try
                                 {
                                     Icon.ExtractAssociatedIcon(file).Dispose();
@@ -88,26 +88,26 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
                         }
                     }
 
-                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\open\\command", new DataEntry[0]))
+                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\open\\command", Array.Empty<DataEntry>()))
                     {
-                        CheckValue(form, r1, null, new string[] { string.Format(CultureInfo.InvariantCulture, "%SystemRoot%\\System32\\rundll32.exe \"{0}\", ImageView_Fullscreen %1", PhotoGalleryPath) }, de);
+                        CheckValue(form, r1, null, new[] { string.Format(CultureInfo.InvariantCulture, "%SystemRoot%\\System32\\rundll32.exe \"{0}\", ImageView_Fullscreen %1", PhotoGalleryPath) }, de);
                     }
-                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\open", new DataEntry[0]))
+                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\open", Array.Empty<DataEntry>()))
                     {
-                        CheckValue(form, r1, "MuiVerb", new string[] { string.Format(CultureInfo.InvariantCulture, "@{0},-3043", PhotoGalleryPath) }, de);
+                        CheckValue(form, r1, "MuiVerb", new[] { string.Format(CultureInfo.InvariantCulture, "@{0},-3043", PhotoGalleryPath) }, de);
                     }
-                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\open\\DropTarget", new DataEntry[0]))
+                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\open\\DropTarget", Array.Empty<DataEntry>()))
                     {
-                        CheckValue(form, r1, "Clsid", new string[] { PhotoGalleryGuid }, de);
+                        CheckValue(form, r1, "Clsid", new[] { PhotoGalleryGuid }, de);
                     }
-                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\printto\\command", new DataEntry[0]))
+                    using (RegistryKey r1 = OpenSubKey(form, r, "shell\\printto\\command", Array.Empty<DataEntry>()))
                     {
-                        CheckValue(form, r1, null, new string[] { "%SystemRoot%\\System32\\rundll32.exe \"%SystemRoot%\\System32\\shimgvw.dll\", ImageView_PrintTo /pt \"%1\" \"%2\" \"%3\" \"%4\"" }, de);
+                        CheckValue(form, r1, null, new[] { "%SystemRoot%\\System32\\rundll32.exe \"%SystemRoot%\\System32\\shimgvw.dll\", ImageView_PrintTo /pt \"%1\" \"%2\" \"%3\" \"%4\"" }, de);
                     }
                 }
             }
 
-            using (RegistryKey r = OpenSubKey(form, Registry.ClassesRoot, string.Format(CultureInfo.InvariantCulture, "SystemFileAssociations\\{0}", ext), new DataEntry[0]))
+            using (RegistryKey r = OpenSubKey(form, Registry.ClassesRoot, string.Format(CultureInfo.InvariantCulture, "SystemFileAssociations\\{0}", ext), Array.Empty<DataEntry>()))
             {
                 using (RegistryKey r1 = OpenSubKey(form, r, string.Format(CultureInfo.InvariantCulture, "OpenWithList\\{0}", PhotoViewerDll), de, ref openWith))
                 {
@@ -120,16 +120,16 @@ namespace Microsoft.Test.Tools.WicCop.Rules.ShellIntegration
 
             if (!openWith)
             {
-                form.Add(this, Resources.MissingRegistryKey, de, new DataEntry(Resources.Key, new string[] 
-                { 
+                form.Add(this, Resources.MissingRegistryKey, de, new DataEntry(Resources.Key, new string[]
+                {
                     string.Format(CultureInfo.InvariantCulture, "{2}\\{0}\\OpenWithList\\{1}", ext, PhotoViewerDll, Registry.ClassesRoot),
                     string.Format(CultureInfo.InvariantCulture, "{2}\\SystemFileAssociations\\{0}\\OpenWithList\\{1}", ext, PhotoViewerDll, Registry.ClassesRoot)
                 }));
             }
             if (!imagePreview)
             {
-                form.Add(this, Resources.MissingRegistryKey, de, new DataEntry(Resources.Key, new string[] 
-                { 
+                form.Add(this, Resources.MissingRegistryKey, de, new DataEntry(Resources.Key, new string[]
+                {
                     string.Format(CultureInfo.InvariantCulture, "{2}\\{0}\\ShellEx\\ContextMenuHandlers\\ShellImagePreview", ext, PhotoViewerDll, Registry.ClassesRoot),
                     string.Format(CultureInfo.InvariantCulture, "{2}\\SystemFileAssociations\\{0}\\ShellEx\\ContextMenuHandlers\\ShellImagePreview", ext, PhotoViewerDll, Registry.ClassesRoot)
                 }));

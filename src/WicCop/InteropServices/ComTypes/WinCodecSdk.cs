@@ -14,14 +14,16 @@ using System.Text;
 
 namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
 {
+    [Flags]
     public enum WICMetadataCreationOptions : uint
     {
         WICMetadataCreationDefault = 0x00000000,
         WICMetadataCreationAllowUnknown = WICMetadataCreationDefault,
         WICMetadataCreationFailUnknown = 0x00010000,
         WICMetadataCreationMask = 0xFFFF0000
-    };
+    }
 
+    [Flags]
     public enum WICPersistOptions : uint
     {
         WICPersistOptionDefault = 0x00000000,
@@ -31,7 +33,7 @@ namespace Microsoft.Test.Tools.WicCop.InteropServices.ComTypes
         WICPersistOptionNoCacheStream = 0x00000004,
         WICPersistOptionPreferUTF8 = 0x00000008,
         WICPersistOptionMask = 0x0000FFFF
-    };
+    }
 
     [Guid("FEAA2A8D-B3F3-43E4-B25C-D1DE990A1AE1")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
