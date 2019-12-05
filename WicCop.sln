@@ -1,9 +1,22 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WicCop", "src\WicCop\WicCop.csproj", "{4282F9FE-14FF-4013-9884-351F535E92AC}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WicCop", "src\WicCop\WicCop.csproj", "{4282F9FE-14FF-4013-9884-351F535E92AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WicCop.32BitsLoader", "src\WicCop.32BitsLoader\WicCop.32BitsLoader.csproj", "{6A22E3B0-AAE8-4347-8326-30A8DFB99E38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WicCop.32BitsLoader", "src\WicCop.32BitsLoader\WicCop.32BitsLoader.csproj", "{6A22E3B0-AAE8-4347-8326-30A8DFB99E38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5D5CD1E-254F-4D86-BC0C-2C045F918007}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		README.md = README.md
+		WicCop.ruleset = WicCop.ruleset
+		WicCop.ruleset.md = WicCop.ruleset.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94A78792-620B-4B9F-80E8-F22E3603418A}
 	EndGlobalSection
 EndGlobal
